@@ -12,9 +12,9 @@ function App() {
   const { Provider } = loadingContext;
   return (
     <Provider value={value}>
-      <BrowserRouter>
+      <BrowserRouter basename={window.location.pathname || ""}>
         <Routes>
-          <Route path="/" element={<Chart />} />
+          <Route exact path="/" element={<Chart />} />
         </Routes>
       </BrowserRouter>
       {loading && <Loading />}
