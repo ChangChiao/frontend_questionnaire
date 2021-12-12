@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import React, { useState, useMemo } from "react";
 // import Default from "./layout/Default";

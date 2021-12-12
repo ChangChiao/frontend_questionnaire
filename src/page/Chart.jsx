@@ -121,7 +121,7 @@ function Chart() {
   ];
   return (
     <div>
-      <h1>224</h1>
+      <h1 className="text-2xl bg-red-300">224</h1>
       <Slider defaultValue={30} onChange={sliderChange} />
       <DemoGauge
         className="block"

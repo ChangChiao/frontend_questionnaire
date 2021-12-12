@@ -1,7 +1,6 @@
 import axios from "axios";
 import qs from "qs";
 import { Cookie } from "./cookie";
-const env = import.meta.env.VITE_BASIC_TYPE;
 
 const setHeader = () => {
   const token = Cookie("token");
@@ -27,7 +26,6 @@ const filterEmpty = (obj) => {
 
 export const getAjax = (url, sendData = {}) => {
   let data = JSON.parse(JSON.stringify(sendData));
-  data.env = env;
   data = qs.stringify(filterEmpty(data));
   return apiInstance
     .post(url, data)
