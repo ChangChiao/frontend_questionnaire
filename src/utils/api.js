@@ -1,12 +1,9 @@
 import axios from "axios";
 import qs from "qs";
-import { Cookie } from "./cookie";
-
+import { API_URL } from "../global/constant";
 const setHeader = () => {
-  const token = Cookie("token");
   return {
     "Content-Type": "application/x-www-form-urlencoded",
-    Authorization: `Bearer ${token}`,
   };
 };
 
@@ -24,11 +21,11 @@ const filterEmpty = (obj) => {
   return data;
 };
 
-export const getAjax = (url, sendData = {}) => {
+export const getAjax = (url = API_URL, sendData = {}) => {
   let data = JSON.parse(JSON.stringify(sendData));
   data = qs.stringify(filterEmpty(data));
   return apiInstance
-    .post(url, data)
+    .get(url, data)
     .then((response) => {
       console.log("response", response.data);
       return response.data;

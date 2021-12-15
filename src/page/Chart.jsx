@@ -1,11 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import DemoGauge from "../components/DemoGauge";
 import PieChartTest from "../components/PieChartTest";
 import BarChart from "../components/BarChart";
 import ProgressTest from "../components/ProgressTest";
 import Slider from "antd/es/slider";
+import dataContext from "../context/dataContext";
 
 function Chart() {
+  const {data} = useContext(dataContext);
+  const [genderData, setGenderData] = useState({});
+  const [ageData, setAgeData] = useState({})
+  const [majorData, setMajorData] = useState({})
+  useEffect(() => {
+    console.log("context----", data);
+    data.length > 0 && collectAge()
+  }, [data]);
+
+  const collectAge = () => {
+    const genderList = {male:0, female:0}
+    const ageList = {}
+    const majorList = {}
+    data.forEach(element => {
+      const {gender, age, major, company, first_job, works} = element
+      if(gender === "男性"){
+        genderList.male++
+      }else{
+        genderList.female++
+      }
+      if(!(age in ageList)){
+        ageList[age] = 1
+      }else{
+        ageList[age]++
+      }
+      if(!(major in majorList)){
+        majorList[major] = 1
+      }else{
+        majorList[major]++
+      }
+    });
+    setGenderData(genderList);
+    setAgeData(ageList);
+    setMajorData(majorList)
+    console.log("genderList", genderList);
+    console.log("ageList", ageList);
+  }
+
+  const collectGender = () => {
+
+  }
+
+  const collectSchool = () => {
+
+  }
+
+  const collectMajor = () => {
+
+  }
+
   const barData = [
     {
       name: "#4473c5",
