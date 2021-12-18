@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import ChartPie from "../components/ChartPie";
 import ChartBar from "../components/ChartBar";
-import ChartBarH from "./ChartBarH";
+import ChartDualAxes from "./ChartDualAxes";
 import dataContext from "../context/dataContext";
 function Salary() {
   const { data } = useContext(dataContext);
@@ -76,6 +76,24 @@ function Salary() {
     setSatisfactionData(satisfactionList);
   };
 
+  //   const addSalary = (salaryList, job_tenure, salary) => {
+  //     if (!salaryList[job_tenure]) {
+  //       salaryList[job_tenure] = [];
+  //     } else {
+  //       salaryList[job_tenure].push(salary);
+  //     }
+  //   };
+
+  //   const averageSalary = (salaryList) => {
+  //     const obj = {};
+  //     Object.keys(salaryList).forEach((key) => {
+  //       const sum = salaryList[key].reduce((a, b) => a + b, 0);
+  //       const avg = sum / salaryList[key].length;
+  //       obj[key] = avg;
+  //     });
+  //     return obj;
+  //   };
+
   return (
     <div>
       <div className="block p-6 mt-10">
@@ -84,7 +102,7 @@ function Salary() {
       </div>
       <div className="block p-6 mt-10">
         <h3 className="title">年薪</h3>
-        <ChartBar chartValue={salaryData} />
+        <ChartDualAxes chartValue={salaryData} />
       </div>
       {/* <div className="row mt-10">
         <div className="block p-6 w-full mr-0 md:w-1/2 md:mr-4">
