@@ -29,10 +29,18 @@ const ChartBar = ({ chartValue }) => {
         opacity: 0.6,
       },
     },
+    yAxis: {
+      label: {
+        style: {
+          fill: "#ddd",
+        },
+      },
+    },
     xAxis: {
       label: {
-        autoHide: true,
-        autoRotate: false,
+        style: {
+          fill: "#ddd",
+        },
       },
     },
     color: ({ type }) => {

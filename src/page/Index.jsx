@@ -6,16 +6,16 @@ function Index() {
   const [state, setstate] = useState(0);
   useEffect(() => {}, []);
   return (
-    <div>
-      <h1 className="text-center font-bold text-2xl text-gray-600 pt-10">
+    <div className="p-10">
+      <h1 className="text-center font-bold text-2xl text-primary-100">
         2021前端薪資調查
       </h1>
-      <ul className="m-auto mt-6 w-72 p-1 h-10 flex items-center justify-between border border-gray-400 rounded-sm cursor-pointer">
+      <ul className="m-auto mt-6 w-72 p-1 h-10 flex items-center justify-between border border-gray-200 rounded-sm cursor-pointer">
         <li
           className={clsx(
             "w-1/2",
             "text-lg",
-            "text-gray-700",
+            "text-gray-200",
             "text-center",
             state === 0 && "bg-gray-400",
           )}
@@ -29,7 +29,7 @@ function Index() {
           className={clsx(
             "w-1/2",
             "text-lg",
-            "text-gray-700",
+            "text-gray-200",
             "text-center",
             state === 1 && "bg-gray-400",
           )}

@@ -53,8 +53,8 @@ const DemoPie = ({ chartValue }) => {
           attrs: {
             x: 0,
             y: 25,
-            text: `${data.value}位 ${(data.percent * 100).toFixed(2)}%`,
-            fill: "rgba(0, 0, 0, 0.65)",
+            text: `${data.value}位 ${(data.percent * 100).toFixed(0)}%`,
+            fill: "#ccc",
             fontWeight: 700,
           },
         });

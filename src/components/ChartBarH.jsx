@@ -21,6 +21,20 @@ const ChartBarH = ({ chartValue }) => {
     xField: "value",
     yField: "type",
     seriesField: "type",
+    xAxis: {
+      label: {
+        style: {
+          fill: "#ddd",
+        },
+      },
+    },
+    yAxis: {
+      label: {
+        style: {
+          fill: "#ddd",
+        },
+      },
+    },
     color: ({ type }) => {
       return type === "26~30 歲" ? "#FAAD14" : "#5B8FF9";
     },
