@@ -9,7 +9,7 @@ const ChartDualAxes = ({ chartValue }) => {
     for (let key in chartValue) {
       const obj = {
         type: key,
-        年薪: chartValue[key],
+        人數: chartValue[key],
         count: chartValue[key],
       };
       result.push(obj);
@@ -20,14 +20,9 @@ const ChartDualAxes = ({ chartValue }) => {
   const config = {
     data: [data, data],
     xField: "type",
-    yField: ["年薪", "count"],
+    yField: ["人數", "count"],
     color: "#fff",
     legend: {
-      textStyle: {
-        style: {
-          fill: "#ddd",
-        },
-      },
       itemName: {
         style: {
           fill: "#ddd",

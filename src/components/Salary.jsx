@@ -2,13 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import ChartPie from "../components/ChartPie";
 import ChartBar from "../components/ChartBar";
 import ChartDualAxes from "./ChartDualAxes";
+import ChartCircle from "./ChartCircle";
 import dataContext from "../context/dataContext";
 function Salary() {
   const { data } = useContext(dataContext);
   const [seniorityData, setSeniorityData] = useState({});
   const [salaryData, setSalaryData] = useState({});
-  const [satisfactionData, setSatisfactionData] = useState({});
   const [industryData, setIndustryData] = useState({});
+  const [satisfactionData, setSatisfactionData] = useState({});
   const [educationData, setEducation] = useState({});
   useEffect(() => {
     console.log("context----", data);
@@ -56,7 +57,6 @@ function Salary() {
   };
 
   const collectAge = () => {
-    const genderList = { 男: 0, 女: 0 };
     const seniorityList = {};
     const salaryList = {};
     const industryList = {};
@@ -72,7 +72,7 @@ function Salary() {
     // setGenderData(genderList);
     setSeniorityData(seniorityList);
     setSalaryData(sortOrder(salaryList));
-    setIndustryData(sortOrder(industryList));
+    setIndustryData(soryByValue(industryList, 12));
     setSatisfactionData(satisfactionList);
   };
 
@@ -103,6 +103,10 @@ function Salary() {
       <div className="block p-6 mt-10">
         <h3 className="title">年薪</h3>
         <ChartDualAxes chartValue={salaryData} />
+      </div>
+      <div className="block p-6 mt-10">
+        <h3 className="title">產業分佈</h3>
+        <ChartCircle chartValue={industryData} />
       </div>
       {/* <div className="row mt-10">
         <div className="block p-6 w-full mr-0 md:w-1/2 md:mr-4">
