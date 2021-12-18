@@ -1,6 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Chart from "./page/Chart";
+import Index from "./page/Index";
 import { getAjax } from "./utils/api";
 import Loading from "./components/Loading";
 import dataContext from "./context/dataContext";
@@ -21,12 +21,12 @@ function App() {
   }, []);
   useEffect(() => {
     console.log("data", data);
-  }, [data])
+  }, [data]);
   return (
-    <Provider value={{data}}>
+    <Provider value={{ data }}>
       <BrowserRouter basename={window.location.pathname || ""}>
         <Routes>
-          <Route exact path="/" element={<Chart />} />
+          <Route exact path="/" element={<Index />} />
         </Routes>
       </BrowserRouter>
     </Provider>

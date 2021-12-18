@@ -3,59 +3,54 @@ import DemoGauge from "../components/DemoGauge";
 import PieChartTest from "../components/PieChartTest";
 import BarChart from "../components/BarChart";
 import ProgressTest from "../components/ProgressTest";
-import Slider from "antd/es/slider";
+import ChartPie from "../components/ChartPie";
+import ChartBar from "../components/ChartBar";
 import dataContext from "../context/dataContext";
 
 function Chart() {
-  const {data} = useContext(dataContext);
+  const { data } = useContext(dataContext);
   const [genderData, setGenderData] = useState({});
-  const [ageData, setAgeData] = useState({})
-  const [majorData, setMajorData] = useState({})
+  const [ageData, setAgeData] = useState({});
+  const [majorData, setMajorData] = useState({});
   useEffect(() => {
     console.log("context----", data);
-    data.length > 0 && collectAge()
+    data.length > 0 && collectAge();
   }, [data]);
 
   const collectAge = () => {
-    const genderList = {male:0, female:0}
-    const ageList = {}
-    const majorList = {}
-    data.forEach(element => {
-      const {gender, age, major, company, first_job, works} = element
-      if(gender === "男性"){
-        genderList.male++
-      }else{
-        genderList.female++
+    const genderList = { 男: 0, 女: 0 };
+    const ageList = {};
+    const majorList = {};
+    data.forEach((element) => {
+      const { gender, age, major, company, first_job, works } = element;
+      if (gender === "男性") {
+        genderList["男"]++;
+      } else {
+        genderList["女"]++;
       }
-      if(!(age in ageList)){
-        ageList[age] = 1
-      }else{
-        ageList[age]++
+      if (!(age in ageList)) {
+        ageList[age] = 1;
+      } else {
+        ageList[age]++;
       }
-      if(!(major in majorList)){
-        majorList[major] = 1
-      }else{
-        majorList[major]++
+      if (!(major in majorList)) {
+        majorList[major] = 1;
+      } else {
+        majorList[major]++;
       }
     });
     setGenderData(genderList);
     setAgeData(ageList);
-    setMajorData(majorList)
+    setMajorData(majorList);
     console.log("genderList", genderList);
     console.log("ageList", ageList);
-  }
+  };
 
-  const collectGender = () => {
+  const collectGender = () => {};
 
-  }
+  const collectSchool = () => {};
 
-  const collectSchool = () => {
-
-  }
-
-  const collectMajor = () => {
-
-  }
+  const collectMajor = () => {};
 
   const barData = [
     {
@@ -172,8 +167,9 @@ function Chart() {
   ];
   return (
     <div>
+      <ChartPie chartValue={genderData} />
+      <ChartBar chartValue={ageData} />
       <h1 className="text-2xl bg-red-300">224</h1>
-      <Slider defaultValue={30} onChange={sliderChange} />
       <DemoGauge
         className="block"
         value={state}
