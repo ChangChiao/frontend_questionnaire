@@ -46,8 +46,7 @@ function Basic() {
     const areaList = {};
     const educationList = {};
     data.forEach((element) => {
-      const { gender, age, major, company, works, education } =
-        element;
+      const { gender, age, major, company, works, education } = element;
       const { area, industry, salary } = company;
       if (gender === "男性") {
         genderList["男"]++;
@@ -68,11 +67,6 @@ function Basic() {
     console.log("ageList", ageList);
   };
 
-  const collectGender = () => {};
-
-  const collectSchool = () => {};
-
-  const collectMajor = () => {};
   return (
     <div>
       <div className="row mt-10">
