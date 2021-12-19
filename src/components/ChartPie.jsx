@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Pie, G2 } from "@ant-design/charts";
 
-const DemoPie = ({ chartValue }) => {
+const ChartPie = ({ chartValue }) => {
   const G = G2.getEngine("canvas");
   const [data, setDataList] = useState([]);
   useEffect(() => {
@@ -74,4 +74,4 @@ const DemoPie = ({ chartValue }) => {
   return <Pie {...config} />;
 };
 
-export default DemoPie;
+export default ChartPie;

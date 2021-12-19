@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import ChartPie from "../components/ChartPie";
 import ChartBar from "../components/ChartBar";
 import ChartDualAxes from "./ChartDualAxes";
 import ChartCircle from "./ChartCircle";
+import ChartLine from "./ChartLine";
 import dataContext from "../context/dataContext";
 function Salary() {
   const { data } = useContext(dataContext);
@@ -10,7 +10,6 @@ function Salary() {
   const [salaryData, setSalaryData] = useState({});
   const [industryData, setIndustryData] = useState({});
   const [satisfactionData, setSatisfactionData] = useState({});
-  const [educationData, setEducation] = useState({});
   useEffect(() => {
     console.log("context----", data);
     data.length > 0 && collectAge();
@@ -62,37 +61,53 @@ function Salary() {
     const industryList = {};
     const satisfactionList = {};
     data.forEach((element) => {
-      const { company, works } = element;
+      const { company } = element;
       const { job_tenure, salary, industry, salary_score } = company;
       addCount(seniorityList, job_tenure);
       addCount(salaryList, salary);
       addCount(industryList, industry);
-      addCount(satisfactionList, salary_score);
+      addSalary(satisfactionList, industry, salary_score);
     });
-    // setGenderData(genderList);
     setSeniorityData(seniorityList);
     setSalaryData(sortOrder(salaryList));
-    setIndustryData(soryByValue(industryList, 12));
-    setSatisfactionData(satisfactionList);
+    const sortedIndustry = soryByValue(industryList, 12);
+    setIndustryData(sortedIndustry);
+    const obj = averageSalary(satisfactionList, sortedIndustry);
+    setSatisfactionData(obj);
   };
 
-  //   const addSalary = (salaryList, job_tenure, salary) => {
-  //     if (!salaryList[job_tenure]) {
-  //       salaryList[job_tenure] = [];
-  //     } else {
-  //       salaryList[job_tenure].push(salary);
-  //     }
-  //   };
+  const addSalary = (satisfactionList, industry, salary_score) => {
+    if (!satisfactionList[industry]) {
+      satisfactionList[industry] = [];
+    } else {
+      satisfactionList[industry].push(salary_score);
+    }
+  };
 
-  //   const averageSalary = (salaryList) => {
-  //     const obj = {};
-  //     Object.keys(salaryList).forEach((key) => {
-  //       const sum = salaryList[key].reduce((a, b) => a + b, 0);
-  //       const avg = sum / salaryList[key].length;
-  //       obj[key] = avg;
-  //     });
-  //     return obj;
-  //   };
+  const roundDecimal = (val, precision) => {
+    return (
+      Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) /
+      Math.pow(10, precision || 0)
+    );
+  };
+
+  const averageSalary = (satisfactionList, industryList) => {
+    console.log("satisfactionList", satisfactionList, industryList);
+    const temp = {};
+    for (let key in industryList) {
+      temp[key] = satisfactionList[key];
+    }
+    console.log("new@@@", temp);
+    const obj = {};
+    Object.keys(temp).forEach((key) => {
+      const sum = temp[key].reduce((a, b) => Number(a) + Number(b), 0);
+      const avg = sum / temp[key].length;
+      console.log("avg", avg);
+      obj[key] = roundDecimal(avg, 2);
+    });
+    console.log("?????----", obj);
+    return obj;
+  };
 
   return (
     <div>
@@ -108,19 +123,9 @@ function Salary() {
         <h3 className="title">產業分佈</h3>
         <ChartCircle chartValue={industryData} />
       </div>
-      {/* <div className="row mt-10">
-        <div className="block p-6 w-full mr-0 md:w-1/2 md:mr-4">
-          <h3 className="title">性別比例</h3>
-          <ChartPie chartValue={genderData} />
-        </div>
-        <div className="block p-6 w-full mr-0 md:w-1/2">
-          <h3 className="title">教育程度</h3>
-          <ChartBarH chartValue={educationData} />
-        </div>
-      </div> */}
       <div className="block p-6 mt-10">
-        <h3 className="title">產業薪資與滿意度</h3>
-        {/* <ChartBarH chartValue={majorData} /> */}
+        <h3 className="title">產業薪資滿意度</h3>
+        <ChartLine chartValue={satisfactionData} />
       </div>
     </div>
   );

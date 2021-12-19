@@ -17,7 +17,7 @@ function Index() {
             "text-lg",
             "text-gray-200",
             "text-center",
-            state === 0 && "bg-gray-400",
+            state === 0 && "bg-gray-500",
           )}
           onClick={() => {
             setstate(0);
@@ -31,7 +31,7 @@ function Index() {
             "text-lg",
             "text-gray-200",
             "text-center",
-            state === 1 && "bg-gray-400",
+            state === 1 && "bg-gray-500",
           )}
           onClick={() => {
             setstate(1);
